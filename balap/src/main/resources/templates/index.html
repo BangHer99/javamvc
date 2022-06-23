@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+
+    <title th:text="${msg}">Demo Mvc</title>
+</head>
+<h1 style="background-color: rgb(7, 101, 26); font-style: italic; color : rgb(255, 255, 255)">Data Undangan</h1>
+<body style="background-color:rgb(247, 247, 247) ;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <div class="container-fluid">
+          <a class="btn btn-outline-light" th:href="@{add}">Add New</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Instagram</a></li>
+                  <li><a class="dropdown-item" href="#">Facebook</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">WhatsApp</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">News</a>
+              </li>
+            </ul>
+            <form class="d-flex" th:object="${searchfrom}" method="post" th:action="@{/search}">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:field="*{keyword}">
+              <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <table class="table" border="5">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nama</th>
+              <th>Alamat</th>
+              <th>Kode</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="santri : ${santries}">
+              <td th:text="${santri.id}"></td>
+              <td th:text="${santri.nama}"></td>
+              <td th:text="${santri.alamat}"></td>
+              <td th:text="${santri.kode}"></td>
+              <td>
+                <a class="btn btn-success" th:href="@{'/edit/'+${santri.id}}">Edit</a>
+                <a class="btn btn-danger" th:href="@{'/delete/'+${santri.id}}">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>Santri Balap by Bang Herry</hr>
+
+
+      </div>
+
+
+    
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+
+    
+</body>
+</html>
